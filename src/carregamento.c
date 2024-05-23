@@ -6,6 +6,34 @@
 #define MAX_PATH_SIZE (MAX_FILENAME_SIZE + sizeof(PATH_PREFIX)) // Tamanho total da string. ex:(../data/cargas/DadosGraos-Carga1.txt) ||funcao sizeof retorna a quantidade de caracteres de uma string.
 
 
+void classeDeCarga (int umidade, int quantidadeDeAmostras, int idAmostra) {
+    int faixaA [100];
+    int faixaB [100];
+    int faixaC [100];
+
+    int quantidadeA = 0;
+    int quantidadeB = 0;
+    int quantidadeC = 0;
+
+    for(int i = 0; i < quantidadeDeAmostras; i++){
+        if(umidade >= 0 && umidade <= 8.5){
+            faixaA[i] = idAmostra;
+            quantidadeA ++;
+        }else if(umidade >= 8.6 && umidade <= 15){
+            faixaB[i] = idAmostra;
+            quantidadeB ++;
+        }else if(umidade >=16 && umidade <= 25) {
+            faixaC[i] = idAmostra;
+            quantidadeC++;
+        }
+    }
+    printf("\nvou imprimir as faixas\n");
+    printf("%d\n", faixaA[0]);
+    printf("%d\n", faixaB[0]);
+    printf("%d\n", faixaC[10]);
+    printf("cheguei ate aqui");
+}
+
 void gerarRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float umidade, float pesoLimpo, int transgenico, int ID) {
     printf("\n%d\n", protocolo);
     printf("%d\n", quantidadeDeAmostras);
@@ -72,18 +100,16 @@ void carregamento() {
                 somatorioDoPesoDasImpurezas += (pesoDaImpureza/1000);
                 somatorioDoPesoDasAmostras += pesoDaAmostra;
 
-                // printf("\nDiferenca entre peso da amostra e peso da impureza: %.2f\n", diferencaPesoImpureza);
-                // printf("Somatorio do grau de umidade * Diferenca entre peso amostra e peso impureza: %.2f\n", multUmidadePesoImpureza);
+
                 
+
+
             } else {
                 printf("Nao foi possivel ler a linha do arquivo.\n");
             }
-        
-        
-        
         }
 
-        gerarRelatorio(protocolo, quantidadeDeAmostras, DD, MM, umidade, peso, tipo, ID);
+        // gerarRelatorio(protocolo, quantidadeDeAmostras, DD, MM, umidade, peso, tipo, ID);
 
     percentualDeImpurezas = somatorioDoPesoDasImpurezas / somatorioDoPesoDasAmostras; 
     percentualUmidade = multUmidadePesoImpureza / somatorioDiferencaPesoImpureza;
@@ -94,7 +120,4 @@ void carregamento() {
 
     }
     fclose(file); // fecha o arquivo de entrada
-
-    
-
 }
