@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "stdio.h": "c",
-    "leitura.h": "c"
+    "leitura.h": "c",
+    "carregamento.h": "c"
   }
 }

@@ -6,14 +6,25 @@
 #define MAX_PATH_SIZE (MAX_FILENAME_SIZE + sizeof(PATH_PREFIX)) // Tamanho total da string. ex:(../data/cargas/DadosGraos-Carga1.txt) ||funcao sizeof retorna a quantidade de caracteres de uma string.
 
 
-//a funcao leArquivo recebe varios valores em forma de ponteiros que vamos usar, para assim podermos usar em outros arquivos.
-void leArquivo() {
+void gerarRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float umidade, float pesoLimpo, int transgenico, int ID) {
+    printf("\n%d\n", protocolo);
+    printf("%d\n", quantidadeDeAmostras);
+    printf("%d\n", DD);
+    printf("%d\n", MM);
+    printf("%.2f\n", umidade);
+    printf("%.2f\n", pesoLimpo);
+    printf("%d\n", transgenico);
+    printf("%d\n", ID);
+}
+
+//Essa é a funcao que realiza a leitura e os calculos do projeto
+void carregamento() {
     FILE *file; // declarando o ponteiro do tipo FILE
     char nomeDoArquivo[MAX_FILENAME_SIZE]; // declarando um vetor que vai receber o nome do arquivo que o usuário digitar || O [MAX_FILE_NAME] recebe nada mais que o valor 100 definido la em cima
     char caminhoCompleto[MAX_PATH_SIZE]; // declarando um vetor que vai receber a string completa do caminho
 
     int ID, DD, MM, protocolo, quantidadeDeAmostras, tipo;
-    float peso, somatorioDoPesoDasImpurezas, somatorioDoPesoDasAmostras, percentualDeImpurezas, multUmidadePesoImpureza, diferencaPesoImpureza, percentualUmidade, somatorioDiferencaPesoImpureza; //variaveis que vamos usar pra fazer os calculos de PIC e GUC
+    float peso, somatorioDoPesoDasImpurezas, somatorioDoPesoDasAmostras, percentualDeImpurezas, multUmidadePesoImpureza, diferencaPesoImpureza, percentualUmidade, somatorioDiferencaPesoImpureza, umidade; //variaveis que vamos usar pra fazer os calculos de PIC e GUC
 
     printf("Digite o nome do arquivo da carga:\n");
     fgets(nomeDoArquivo, MAX_FILENAME_SIZE, stdin); // Aqui eu usei fgets invés de scanf porque o scanf estava me retornando um "O" no final do nome do arquivo, aí o programa nao encontrava o caminho certo
@@ -49,7 +60,7 @@ void leArquivo() {
         // faz um loop para ler linha a linha do arquivo até acabar
         while (fgets(conteudoDoArquivo, 200, file) != NULL) {
             int idAmostra; // declaração do elemento 1 da linha
-            float pesoDaAmostra, pesoDaImpureza, umidade; // declaração dos elementos 2 em diante da mesma linha
+            float pesoDaAmostra, pesoDaImpureza; // declaração dos elementos 2 em diante da mesma linha
 
             //O laço ta lendo linha por linha, toda vez que ele passa por uma linha esse sscanf armazena um dado da linha nas variaveis, nessa ordem do sscanf
             if (sscanf(conteudoDoArquivo, "%d %f %f %f", &idAmostra, &pesoDaAmostra, &pesoDaImpureza, &umidade) == 4) { //estou usando sscanf pq essa funcao além de funcionar como um fscanf normal, ela checa se os 4 valores foram lidos corretamente.
@@ -67,7 +78,12 @@ void leArquivo() {
             } else {
                 printf("Nao foi possivel ler a linha do arquivo.\n");
             }
+        
+        
+        
         }
+
+        gerarRelatorio(protocolo, quantidadeDeAmostras, DD, MM, umidade, peso, tipo, ID);
 
     percentualDeImpurezas = somatorioDoPesoDasImpurezas / somatorioDoPesoDasAmostras; 
     percentualUmidade = multUmidadePesoImpureza / somatorioDiferencaPesoImpureza;

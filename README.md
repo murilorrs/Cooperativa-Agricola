@@ -1,8 +1,16 @@
+# Agricultural-Cooperative
+System for Grain Cargo Management
+
+This software, developed in C, is designed to manage grain cargoes within a cooperative.
+
+The program reads files containing data collected by sensors, including humidity, weight, impurity levels, and product type, among other parameters.
+It processes this data, storing it in a database, and generates monthly, yearly, individual, and statistical reports based on the stored information.
+
 # Cooperativa-Agricola
-Sistema para gerenciamento de cargas de grãos
+Cooperativa Agrícola
+Sistema de Gerenciamento de Cargas de Grãos
 
+Este software, desenvolvido em C, foi projetado para gerenciar cargas de grãos em uma cooperativa.
 
-Esse é um software em C para o o gerenciemento de cargas de grãos em uma cooperativa.
-
-O programa lê arquivos que contêm dados medidos por sensores sobre umidade, peso, grau de impureza, tipo de produto, entre outros.
-Faz calculos com estes, armazena-os em um banco de dados e gera relatórios mensais, anuais, individuais e estatísticos usando os dados armazenados.
+O programa lê arquivos contendo dados coletados por sensores, incluindo umidade, peso, níveis de impureza e tipo de produto, entre outros parâmetros.
+Ele processa esses dados, armazenando-os em um banco de dados, e gera relatórios mensais, anuais, individuais e estatísticos com base nas informações armazenadas.

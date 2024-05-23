@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "../include/leitura.h"
+#include "../include/carregamento.h"
 
 int main() {
 
-    leArquivo();
+    carregamento();
 
 
     // escreveArquivo(ID, protocolo, peso, quantidadeDeAmostras, tipo, somaImpureza, somaUmidade);
