@@ -5,13 +5,6 @@
 #define MAX_FILENAME_SIZE 100   // Tamanho máximo permitido para o nome do arquivo
 #define MAX_PATH_SIZE (MAX_FILENAME_SIZE + sizeof(PATH_PREFIX)) // Tamanho total da string. ex:(../data/cargas/DadosGraos-Carga1.txt) ||funcao sizeof retorna a quantidade de caracteres de uma string.
 
-
-
-
-
-
-
-
 void gerarRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float umidade, float pesoLimpo, int transgenico, int ID) {
     printf("\n%d\n", protocolo);
     printf("%d\n", quantidadeDeAmostras);
