@@ -59,6 +59,7 @@
   "files.associations": {
     "stdio.h": "c",
     "leitura.h": "c",
-    "carregamento.h": "c"
+    "carregamento.h": "c",
+    "string.h": "c"
   }
 }
