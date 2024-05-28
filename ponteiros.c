@@ -19,7 +19,7 @@ int main(){
 
 	printf("%d", vetor[1]);
 
-	
+	printf("cheguei até aqui")
 
 	return 0;
 }
