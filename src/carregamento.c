@@ -93,7 +93,6 @@ void carregamento() {
     // printf("\nPercentual de Impureza:%.2f%%\n", percentualDeImpurezas*100);
     // printf("Percentual Umidade:%.2f\n", percentualUmidade);
 
-
     }
     fclose(file); // fecha o arquivo de entrada
 }
