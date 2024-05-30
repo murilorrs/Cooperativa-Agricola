@@ -5,15 +5,44 @@
 #define MAX_FILENAME_SIZE 100   // Tamanho máximo permitido para o nome do arquivo
 #define MAX_PATH_SIZE (MAX_FILENAME_SIZE + sizeof(PATH_PREFIX)) // Tamanho total da string. ex:(../data/cargas/DadosGraos-Carga1.txt) ||funcao sizeof retorna a quantidade de caracteres de uma string.
 
-void gerarRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float umidade, float pesoLimpo, int transgenico, int ID) {
-    printf("\n%d\n", protocolo);
-    printf("%d\n", quantidadeDeAmostras);
-    printf("%d\n", DD);
-    printf("%d\n", MM);
-    printf("%.2f\n", umidade);
-    printf("%.2f\n", pesoLimpo);
-    printf("%d\n", transgenico);
-    printf("%d\n", ID);
+void gerarRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
+
+
+    printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
+    printf("ANO: 2024\n");
+    printf("-------------------------------------------");
+
+
+    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d/24\n", protocolo, quantidadeDeAmostras, DD, MM);
+    printf("Umidade: %.2f%%    Peso limpo: %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
+
+    printf("Umidade: Faixa 1                            Quant.:%d\n", quantidadeA);
+    printf("Ident. das Amostras: ");
+
+    for(int i = 0; i < quantidadeA; i++){
+        printf("%d, ", faixaA[i]);
+    }
+
+    printf(".\n\n");
+
+    printf("Umidade: Faixa 2                            Quant.:%d\n", quantidadeB);
+    printf("Ident. das Amostras: ");
+
+    for(int i = 0; i < quantidadeB; i++){
+        printf("%d, ", faixaB[i]);
+    }
+
+    printf(".\n\n");
+
+    printf("Umidade: Faixa 3                            Quant.:%d\n", quantidadeC);
+    printf("Ident. das Amostras: ");
+
+    for(int i = 0; i < quantidadeB; i++){
+        printf("%d, ", faixaC[i]);
+    }
+
+    printf(".\n\n");
+
 }
 
 //Essa é a funcao que realiza a leitura e os calculos do projeto
@@ -61,16 +90,16 @@ void carregamento() {
 
         //variáveis para gerar o relatório
         int quantidadeA = 0, quantidadeB = 0, quantidadeC = 0;
-        int faixaA [100];
-        int faixaB [100];
-        int faixaC [100];
+        int faixaA [100] = {0};
+        int faixaB [100] = {0};
+        int faixaC [100] = {0};
 
 
         // faz um loop para ler linha a linha do arquivo até acabar
         while (fgets(conteudoDoArquivo, 200, file) != NULL) {
 
             //O laço ta lendo linha por linha, toda vez que ele passa por uma linha esse sscanf armazena um dado da linha nas variaveis, nessa ordem do sscanf
-            if (sscanf(conteudoDoArquivo, "%d %f %f %f", &idAmostra, &pesoDaAmostra, &pesoDaImpureza, &umidade) == 4) { //estou usando sscanf pq essa funcao além de funcionar como um fscanf normal, ela checa se os 4 valores foram lidos corretamente.
+            if (sscanf(conteudoDoArquivo, "%d %f %d %f", &idAmostra, &pesoDaAmostra, &pesoDaImpureza, &umidade) == 4) { //estou usando sscanf pq essa funcao além de funcionar como um fscanf normal, ela checa se os 4 valores foram lidos corretamente.
                 
                 diferencaPesoImpureza = pesoDaAmostra - (pesoDaImpureza/1000);
                 multiplicaUmidadePesoImpureza += umidade*diferencaPesoImpureza;
@@ -79,19 +108,53 @@ void carregamento() {
                 somatorioDoPesoDasImpurezas += (pesoDaImpureza/1000);
                 somatorioDoPesoDasAmostras += pesoDaAmostra;
 
-            } else {
+                if(umidade >= 0 && umidade <=8.5){
+                    faixaA[quantidadeA] = idAmostra;
+                    quantidadeA++;
+                }
+
+                if(umidade >=8.6 && umidade <= 15){
+                    faixaB[quantidadeB] = idAmostra;
+                    quantidadeB++;
+                }
+
+                if(umidade >= 15.1 && umidade <= 25){
+                    faixaC[quantidadeC] = idAmostra;
+                    quantidadeC++;
+
+                
+                }
+            }else {
                 printf("Nao foi possivel ler a linha do arquivo.\n");
             }
         }
 
 
-        // gerarRelatorio(protocolo, quantidadeDeAmostras, DD, MM, umidade, peso, tipo, ID);
+        // Impressão dos valores de todas as faixas
+        // printf("Valores da Faixa A:\n");
+        // for (int i = 0; i < quantidadeA; i++) {
+        //     printf("%.2f ", faixaA[i]);
+        // }
+        // printf("\n");
+
+        // printf("Valores da Faixa B:\n");
+        // for (int i = 0; i < quantidadeB; i++) {
+        //     printf("%.2f ", faixaB[i]);
+        // }
+        // printf("\n");
+
+        // printf("Valores da Faixa C:\n");
+        // for (int i = 0; i < quantidadeC; i++) {
+        //     printf("%.2f ", faixaC[i]);
+        // }
+
+
 
     percentualDeImpurezas = somatorioDoPesoDasImpurezas / somatorioDoPesoDasAmostras; 
     percentualUmidade = multiplicaUmidadePesoImpureza / somatorioDiferencaPesoImpureza;
 
-    // printf("\nPercentual de Impureza:%.2f%%\n", percentualDeImpurezas*100);
-    // printf("Percentual Umidade:%.2f\n", percentualUmidade);
+    gerarRelatorio(protocolo, quantidadeDeAmostras, DD, MM, percentualUmidade, pesoGeralDaCarga, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
+
 
     }
     fclose(file); // fecha o arquivo de entrada
