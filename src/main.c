@@ -70,13 +70,11 @@ int main() {
                         break;
                     }else if(opcaoDeSair == 2){
                         system("clear");
-                        system("cls");
                         break;
                     }else{
                         printf("\nEntrada invalida. Insira um valor dentro do intervalo\n=> ");
                         while(getchar() != '\n');
                         system("clear");
-                        system("cls");
                     }
                 } 
             }
