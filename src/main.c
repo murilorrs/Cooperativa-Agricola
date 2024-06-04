@@ -9,7 +9,7 @@ void limpaBuffer(){
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-
+//system
 int main() {
     int opcaoGeral, opcaoRelatorio, opcaoRelatorioQuantitativo, mesEscolhido;
 
@@ -26,6 +26,7 @@ int main() {
         switch(opcaoGeral){
             case 1:
                 limpaBuffer();
+                system("clear");
                 carregamento();
                 break;
             case 2:
@@ -35,7 +36,7 @@ int main() {
                 printf("Escolha uma opcao de relatório:\n");
                 printf("1: Quantitativo mensal\n");
                 printf("2: Geral\n=> ");
-                scanf("%d", opcaoRelatorio);
+                scanf("%d", &opcaoRelatorio);
 
                 if(opcaoRelatorio == 1){
                     printf("Escolha o modelo de relatório quantitativo:\n");
@@ -69,11 +70,13 @@ int main() {
                         break;
                     }else if(opcaoDeSair == 2){
                         system("clear");
+                        system("cls");
                         break;
                     }else{
                         printf("\nEntrada invalida. Insira um valor dentro do intervalo\n=> ");
                         while(getchar() != '\n');
                         system("clear");
+                        system("cls");
                     }
                 } 
             }

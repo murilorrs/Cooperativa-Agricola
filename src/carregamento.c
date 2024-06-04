@@ -83,8 +83,8 @@ void carregamento() {
         fgets(conteudoDoArquivo, 200, file); // Como a gente precisa ler a partir da segunda linha (os dados de impureza e umidade começam lá), lemos aqui a primeira linha para pulá-la no próximo fgets
 
         // inicializa as variáveis que vao receber os valores de cada elemento da amostra
-        int idAmostra; // recebe o elemento 1 da linha
-        float pesoDaAmostra, pesoDaImpureza, umidade; // recebe o elemento 2 em diante da mesma linha
+        int idAmostra, pesoDaImpureza; // recebe o elemento 1 da linha
+        float pesoDaAmostra, umidade; // recebe o elemento 2 em diante da mesma linha
 
         //variaveis de calculo PIC GUC
         float somatorioDoPesoDasImpurezas = 0, somatorioDoPesoDasAmostras = 0, somatorioDiferencaPesoImpureza = 0, multiplicaUmidadePesoImpureza = 0, diferencaPesoImpureza;//variaveis usadas pra calcular PIC E GUC
@@ -95,7 +95,6 @@ void carregamento() {
         int faixaA [100] = {0};
         int faixaB [100] = {0};
         int faixaC [100] = {0};
-
 
         // faz um loop para ler linha a linha do arquivo até acabar
         while (fgets(conteudoDoArquivo, 200, file) != NULL) {
