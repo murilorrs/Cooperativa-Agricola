@@ -60,6 +60,7 @@
     "stdio.h": "c",
     "leitura.h": "c",
     "carregamento.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "arquiva.h": "c"
   }
 }

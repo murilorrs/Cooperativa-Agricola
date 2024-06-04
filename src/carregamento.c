@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include "../include/arquiva.h"
 
 #define PATH_PREFIX "../data/cargas/"  // Diretório onde os arquivos de entrada estão armazenados
 #define MAX_FILENAME_SIZE 100   // Tamanho máximo permitido para o nome do arquivo
 #define MAX_PATH_SIZE (MAX_FILENAME_SIZE + sizeof(PATH_PREFIX)) // Tamanho total da string. ex:(../data/cargas/DadosGraos-Carga1.txt) ||funcao sizeof retorna a quantidade de caracteres de uma string.
 
-void gerarRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
-
+void geraRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
+    system("clear");
 
     printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
     printf("ANO: 2024\n");
@@ -54,7 +56,7 @@ void carregamento() {
     int ID, DD, MM, protocolo, quantidadeDeAmostras, tipo;
     float pesoGeralDaCarga; //variaveis que vamos usar pra fazer os calculos de PIC e GUC
 
-    printf("Digite o nome do arquivo da carga:\n");
+    printf("Digite o nome do arquivo da carga:\n=> ");
     fgets(nomeDoArquivo, MAX_FILENAME_SIZE, stdin); // Aqui eu usei fgets invés de scanf porque o scanf estava me retornando um "O" no final do nome do arquivo, aí o programa nao encontrava o caminho certo
     nomeDoArquivo[strcspn(nomeDoArquivo, "\n")] = '\0'; // Removendo o /n do final da string porque também estava atrapalhando na hora de encontrar o arquivo
 
@@ -68,16 +70,16 @@ void carregamento() {
         printf("O arquivo nao existe.");
     } else {//se abriu corretamente continua o codigo
 
-        printf("\nDigite o dia do recebimento dessa carga:\n");
+        printf("\nDigite o dia do recebimento dessa carga:\n=> ");
         scanf("%d", &DD);
-        printf("\nDigite o mes do recebimento dessa carga:\n");
+        printf("\nDigite o mes do recebimento dessa carga:\n=> ");
         scanf("%d", &MM);
 
         fscanf(file, "%d%d%f%d%d", &ID, &protocolo, &pesoGeralDaCarga, &quantidadeDeAmostras, &tipo); // Usa fscanf para ler os 5 primeiros dados do arquivo
 
         // **********************************************************************LENDO OS PROXIMOS ARQUIVOS******************************************************************************************************************************
 
-        char conteudoDoArquivo[200]; // declara um vetor que vai receber o conteúdo do arquivo => a unica finalidade é pra podermos usar o fgets mais pra frente, nao armazena dados relevantes
+        char conteudoDoArquivo[200]; // declara um vetor que vai receber o conteúdo do arquivo =>  a unica finalidade é pra podermos usar o fgets mais pra frente, nao armazena dados relevantes
         fgets(conteudoDoArquivo, 200, file); // Como a gente precisa ler a partir da segunda linha (os dados de impureza e umidade começam lá), lemos aqui a primeira linha para pulá-la no próximo fgets
 
         // inicializa as variáveis que vao receber os valores de cada elemento da amostra
@@ -121,39 +123,16 @@ void carregamento() {
                 if(umidade >= 15.1 && umidade <= 25){
                     faixaC[quantidadeC] = idAmostra;
                     quantidadeC++;
-
-                
                 }
             }else {
                 printf("Nao foi possivel ler a linha do arquivo.\n");
             }
         }
 
-
-        // Impressão dos valores de todas as faixas
-        // printf("Valores da Faixa A:\n");
-        // for (int i = 0; i < quantidadeA; i++) {
-        //     printf("%.2f ", faixaA[i]);
-        // }
-        // printf("\n");
-
-        // printf("Valores da Faixa B:\n");
-        // for (int i = 0; i < quantidadeB; i++) {
-        //     printf("%.2f ", faixaB[i]);
-        // }
-        // printf("\n");
-
-        // printf("Valores da Faixa C:\n");
-        // for (int i = 0; i < quantidadeC; i++) {
-        //     printf("%.2f ", faixaC[i]);
-        // }
-
-
-
     percentualDeImpurezas = somatorioDoPesoDasImpurezas / somatorioDoPesoDasAmostras; 
     percentualUmidade = multiplicaUmidadePesoImpureza / somatorioDiferencaPesoImpureza;
 
-    gerarRelatorio(protocolo, quantidadeDeAmostras, DD, MM, percentualUmidade, pesoGeralDaCarga, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
+    geraRelatorio(protocolo, quantidadeDeAmostras, DD, MM, percentualUmidade, pesoGeralDaCarga, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
 
 
     }
