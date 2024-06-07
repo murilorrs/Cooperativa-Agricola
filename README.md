@@ -1,4 +1,4 @@
-# Agricultural-Cooperative🌱
+# Grao do Vale🌱
 System for Grain Cargo Management
 
 This software, developed in C, is designed to manage grain cargoes within a cooperative.
@@ -6,7 +6,7 @@ This software, developed in C, is designed to manage grain cargoes within a coop
 The program reads files containing data collected by sensors, including humidity, weight, impurity levels, and product type, among other parameters.
 It processes this data, storing it in a database, and generates monthly, yearly, individual, and statistical reports based on the stored information.
 
-# Cooperativa-Agricola🌱
+# Grão do Vale🌱
 Cooperativa Agrícola
 Sistema de Gerenciamento de Cargas de Grãos
 
