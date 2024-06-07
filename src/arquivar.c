@@ -4,7 +4,6 @@
 #include <../include/carregamento.h>
 #include <../include/arquivar.h>
 
-//strcspn
 void carregarArquivos(){
     FILE *file; // declarando o ponteiro do tipo FILE
     char nomeDoArquivo[MAX_FILENAME_SIZE]; // declarando um vetor que vai receber o nome do arquivo que o usuário digitar || O [MAX_FILE_NAME] recebe nada mais que o valor 100 definido la em cima
@@ -92,27 +91,27 @@ void carregarArquivos(){
 
 
     fclose(file); // fecha o arquivo de entrada
-	armazena();
+	armazena(origem, protocolo, MM, DD, tipo, pesoGeralDaCarga, percentualDeImpurezas, percentualUmidade);
 }
 
-void armazena(){
-	printf("cheguei até aqui");
-    // FILE *file;
-    // file = fopen("../data/database/carregamentos.dat", "wb");
+void armazena(int origem, int carga, int MM, int DD, int tipo, float peso, float percImpurezas, float percUmidade){
+	printf("cheguei ate aqui\n");
+    FILE *file;
+    file = fopen("../data/database/carregamentos.dat", "ab");
 
-    // if(file == NULL){
-    //     printf("O arquivo não foi aberto corretamente");
-    //     return;
-    // }
+    if(file == NULL){
+        printf("O arquivo não foi aberto corretamente");
+        return;
+    }
 
-    // fwrite(&origem, sizeof(int), 1, file);
-    // fwrite(&carga, sizeof(int), 1, file);
-    // fwrite(&MM, sizeof(int), 1, file);
-    // fwrite(&DD, sizeof(int), 1, file);
-    // fwrite(&tipo, sizeof(int), 1, file);
-    // fwrite(&peso, sizeof(float), 1, file);
-    // fwrite(&percImpurezas, sizeof(float), 1, file);
-    // fwrite(&percUmidade, sizeof(float), 1, file);
+    fwrite(&origem, sizeof(int), 1, file);
+    fwrite(&carga, sizeof(int), 1, file);
+    fwrite(&MM, sizeof(int), 1, file);
+    fwrite(&DD, sizeof(int), 1, file);
+    fwrite(&tipo, sizeof(int), 1, file);
+    fwrite(&peso, sizeof(float), 1, file);
+    fwrite(&percImpurezas, sizeof(float), 1, file);
+    fwrite(&percUmidade, sizeof(float), 1, file);
 
-    // fclose(file);
+    fclose(file);
 }

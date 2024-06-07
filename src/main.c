@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include/carregamento.h"
 #include <../include/arquivar.h>
-#include "../include/relatorios.h"
+
 
 
 void limpaBuffer();
