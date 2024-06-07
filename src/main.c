@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/carregamento.h"
-#include "../include/arquiva.h"
+#include <../include/arquivar.h>
+#include "../include/relatorios.h"
 
 
-void limpaBuffer(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
+void limpaBuffer();
 
-//system
 int main() {
     int opcaoGeral, opcaoRelatorio, opcaoRelatorioQuantitativo, mesEscolhido;
 
@@ -30,7 +27,9 @@ int main() {
                 carregamento();
                 break;
             case 2:
-
+                limpaBuffer();
+                system("clear");
+                carregarArquivos();
                 break;
             case 3: 
                 printf("Escolha uma opcao de relatório:\n");
@@ -56,6 +55,7 @@ int main() {
 
                         printf("aqui vai vir uma funcao que vai checar se existe relatório no mes escolhido e mostrar pro user\n");
                 }
+                break;
             }
             case 4:
                 printf("\nTem certeza que deseja sair?\n1 sim | 2 nao:\n=> ");
@@ -85,4 +85,9 @@ int main() {
     }
     
     return 0;
+}
+
+void limpaBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }

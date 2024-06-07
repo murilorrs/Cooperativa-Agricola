@@ -61,6 +61,7 @@
     "leitura.h": "c",
     "carregamento.h": "c",
     "string.h": "c",
-    "arquiva.h": "c"
+    "arquiva.h": "c",
+    "stdlib.h": "c"
   }
 }

@@ -2,14 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <../include/carregamento.h>
+#include <../include/arquivar.h>
 
-//Essa é a funcao que realiza a leitura e os calculos do projeto
-void carregamento() {
+//strcspn
+void carregarArquivos(){
     FILE *file; // declarando o ponteiro do tipo FILE
     char nomeDoArquivo[MAX_FILENAME_SIZE]; // declarando um vetor que vai receber o nome do arquivo que o usuário digitar || O [MAX_FILE_NAME] recebe nada mais que o valor 100 definido la em cima
     char caminhoCompleto[MAX_PATH_SIZE]; // declarando um vetor que vai receber a string completa do caminho
 
-    int ID, DD, MM, protocolo, quantidadeDeAmostras, tipo;
+    int origem, DD, MM, protocolo, quantidadeDeAmostras, tipo;
     float pesoGeralDaCarga; //variaveis que vamos usar pra fazer os calculos de PIC e GUC
 
     printf("Digite o nome do arquivo da carga:\n=> ");
@@ -33,7 +34,7 @@ void carregamento() {
         printf("\nDigite o mes do recebimento dessa carga:\n=> ");
         scanf("%d", &MM);
 
-        fscanf(file, "%d%d%f%d%d", &ID, &protocolo, &pesoGeralDaCarga, &quantidadeDeAmostras, &tipo); // Usa fscanf para ler os 5 primeiros dados do arquivo
+        fscanf(file, "%d%d%f%d%d", &origem, &protocolo, &pesoGeralDaCarga, &quantidadeDeAmostras, &tipo); // Usa fscanf para ler os 5 primeiros dados do arquivo
  
         // **********************************************************************LENDO OS PROXIMOS ARQUIVOS******************************************************************************************************************************
 
@@ -91,41 +92,27 @@ void carregamento() {
 
 
     fclose(file); // fecha o arquivo de entrada
-
-    geraRelatorio(protocolo, quantidadeDeAmostras, DD, MM, percentualUmidade, pesoGeralDaCarga, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
+	armazena();
 }
 
-void geraRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
-    system("clear");
+void armazena(){
+	printf("cheguei até aqui");
+    // FILE *file;
+    // file = fopen("../data/database/carregamentos.dat", "wb");
 
-    printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
-    printf("ANO: 2024\n");
-    printf("-------------------------------------------");
-    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d/24\n", protocolo, quantidadeDeAmostras, DD, MM);
-    printf("Umidade: %.2f%%    Peso limpo: %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
-    printf("Umidade: Faixa 1                            Quant.:%d\n", quantidadeA);
-    printf("Ident. das Amostras: ");
+    // if(file == NULL){
+    //     printf("O arquivo não foi aberto corretamente");
+    //     return;
+    // }
 
-    for(int i = 0; i < quantidadeA; i++){
-        printf("%d, ", faixaA[i]);
-    }
+    // fwrite(&origem, sizeof(int), 1, file);
+    // fwrite(&carga, sizeof(int), 1, file);
+    // fwrite(&MM, sizeof(int), 1, file);
+    // fwrite(&DD, sizeof(int), 1, file);
+    // fwrite(&tipo, sizeof(int), 1, file);
+    // fwrite(&peso, sizeof(float), 1, file);
+    // fwrite(&percImpurezas, sizeof(float), 1, file);
+    // fwrite(&percUmidade, sizeof(float), 1, file);
 
-    printf(".\n\n");
-
-    printf("Umidade: Faixa 2                            Quant.:%d\n", quantidadeB);
-    printf("Ident. das Amostras: ");
-
-    for(int i = 0; i < quantidadeB; i++){
-        printf("%d, ", faixaB[i]);
-    }
-
-    printf(".\n\n");
-    printf("Umidade: Faixa 3                            Quant.:%d\n", quantidadeC);
-    printf("Ident. das Amostras: ");
-
-    for(int i = 0; i < quantidadeB; i++){
-        printf("%d, ", faixaC[i]);
-    }
-
-    printf(".\n\n");
+    // fclose(file);
 }
