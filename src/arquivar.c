@@ -95,7 +95,6 @@ void carregarArquivos(){
 }
 
 void armazena(int origem, int carga, int MM, int DD, int tipo, float peso, float percImpurezas, float percUmidade){
-	printf("cheguei ate aqui\n");
     FILE *file;
     file = fopen("../data/database/carregamentos.dat", "ab");
 

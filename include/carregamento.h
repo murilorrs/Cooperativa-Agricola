@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #ifndef CARREGAMENTO_H 
 #define CARREGAMENTO_H
 #define PATH_PREFIX "../data/cargas/"  // Diretório onde os arquivos de entrada estão armazenados
@@ -6,7 +10,7 @@
 
 
 void geraRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]);
-// void carregamento();
+void carregamento();
 
 
 #endif

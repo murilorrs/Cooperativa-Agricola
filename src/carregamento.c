@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <../include/carregamento.h>
 
 //Essa é a funcao que realiza a leitura e os calculos do projeto
@@ -9,7 +6,7 @@ void carregamento() {
     char nomeDoArquivo[MAX_FILENAME_SIZE]; // declarando um vetor que vai receber o nome do arquivo que o usuário digitar || O [MAX_FILE_NAME] recebe nada mais que o valor 100 definido la em cima
     char caminhoCompleto[MAX_PATH_SIZE]; // declarando um vetor que vai receber a string completa do caminho
 
-    int ID, DD, MM, protocolo, quantidadeDeAmostras, tipo;
+    int ID, AA, ano, protocolo, quantidadeDeAmostras, tipo;
     float pesoGeralDaCarga; //variaveis que vamos usar pra fazer os calculos de PIC e GUC
 
     printf("Digite o nome do arquivo da carga:\n=> ");
@@ -28,10 +25,10 @@ void carregamento() {
     }
     
         //se abriu corretamente continua o codigo
-        printf("\nDigite o dia do recebimento dessa carga:\n=> ");
-        scanf("%d", &DD);
         printf("\nDigite o mes do recebimento dessa carga:\n=> ");
-        scanf("%d", &MM);
+        scanf("%d", &AA);
+        printf("\nDigite o ano do recebimento dessa carga:\n=> ");
+        scanf("%d", &ano);
 
         fscanf(file, "%d%d%f%d%d", &ID, &protocolo, &pesoGeralDaCarga, &quantidadeDeAmostras, &tipo); // Usa fscanf para ler os 5 primeiros dados do arquivo
  
@@ -46,7 +43,7 @@ void carregamento() {
 
         //variaveis de calculo PIC GUC
         float somatorioDoPesoDasImpurezas = 0, somatorioDoPesoDasAmostras = 0, somatorioDiferencaPesoImpureza = 0, multiplicaUmidadePesoImpureza = 0, diferencaPesoImpureza;//variaveis usadas pra calcular PIC E GUC
-        float percentualDeImpurezas,percentualUmidade;//recebe valores de PIC E GUC
+        float percentualDeImpurezas,percentualUmidade, pesoLimpo;//recebe valores de PIC E GUC
 
         //variáveis para gerar o relatório
         int quantidadeA = 0, quantidadeB = 0, quantidadeC = 0;
@@ -88,21 +85,21 @@ void carregamento() {
 
     percentualDeImpurezas = somatorioDoPesoDasImpurezas / somatorioDoPesoDasAmostras; 
     percentualUmidade = multiplicaUmidadePesoImpureza / somatorioDiferencaPesoImpureza;
-
+    pesoLimpo = pesoGeralDaCarga - ((percentualDeImpurezas*pesoGeralDaCarga)/100);
 
     fclose(file); // fecha o arquivo de entrada
 
-    geraRelatorio(protocolo, quantidadeDeAmostras, DD, MM, percentualUmidade, pesoGeralDaCarga, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
+    geraRelatorio(protocolo, quantidadeDeAmostras, AA, ano, percentualUmidade, pesoLimpo, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
 }
 
-void geraRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
+void geraRelatorio(int protocolo, int quantidadeDeAmostras, int AA, int ano, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
     system("clear");
 
     printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
     printf("ANO: 2024\n");
     printf("-------------------------------------------");
-    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d/24\n", protocolo, quantidadeDeAmostras, DD, MM);
-    printf("Umidade: %.2f%%    Peso limpo: %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
+    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d\n", protocolo, quantidadeDeAmostras, AA, ano);
+    printf("Umidade(%%): %.2f%%    Peso limpo(t): %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
     printf("Umidade: Faixa 1                            Quant.:%d\n", quantidadeA);
     printf("Ident. das Amostras: ");
 
