@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/carregamento.h"
-#include <../include/arquivar.h>
 #include <../include/leitura.h>
 
 void limpaBuffer();
@@ -13,7 +12,7 @@ int main() {
     while(sair == 0){
 
         printf("******************SELECIONE UMA DAS OPCOES******************\n\n");
-        printf("1: Analisar --- 2: Arquivar --- 3: Gerar relatorio --- 4: Sair\n=> ");
+        printf("1: Analisar --- 2: Gerar relatorio --- 3: Sair\n=> ");
 
         scanf("%d", &opcaoGeral);
         limpaBuffer();
@@ -24,17 +23,13 @@ int main() {
                 system("clear");
                 carregamento();
                 break;
-            case 2:
-                system("clear");
-                carregarArquivos();
-                break;
-            case 3: 
+            case 2: 
                 printf("\nEscolha uma opcao de relatorio:\n");
                 printf("1: Quantitativo mensal\n");
                 printf("2: Geral\n=> ");
                 scanf("%d", &opcaoRelatorio);
                 limpaBuffer();
-
+                
                 if(opcaoRelatorio == 1){
                     printf("\nEscolha o modelo de relatorio quantitativo:\n");
                     printf("1: Mes especifico\n");
@@ -61,7 +56,7 @@ int main() {
                     printf("Funcao que vai imprimir o relatorio geral\n");
                 }
                 break;
-            case 4:
+            case 3:
                 printf("\nTem certeza que deseja sair?\n1 sim | 2 nao:\n=> ");
 
                 while(1){

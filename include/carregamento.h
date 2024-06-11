@@ -11,6 +11,7 @@
 
 void geraRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]);
 void carregamento();
+void arquivar(int origem, int carga, int mes, int ano, int tipo, float peso, float percImpurezas, float percUmidade);
 
 
 #endif

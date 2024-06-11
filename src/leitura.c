@@ -16,7 +16,7 @@ void leitura(){
 
 	for(int i = 0; i < 10; i++){
 		printf("%d", data[i]);
-		printf("\n");
+		printf("\n");	
 	}
 
 	fclose(file);

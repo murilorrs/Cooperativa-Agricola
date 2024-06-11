@@ -6,7 +6,7 @@ void carregamento() {
     char nomeDoArquivo[MAX_FILENAME_SIZE]; // declarando um vetor que vai receber o nome do arquivo que o usuário digitar || O [MAX_FILE_NAME] recebe nada mais que o valor 100 definido la em cima
     char caminhoCompleto[MAX_PATH_SIZE]; // declarando um vetor que vai receber a string completa do caminho
 
-    int ID, AA, ano, protocolo, quantidadeDeAmostras, tipo;
+    int ID, mes, ano, protocolo, quantidadeDeAmostras, tipo;
     float pesoGeralDaCarga; //variaveis que vamos usar pra fazer os calculos de PIC e GUC
 
     printf("Digite o nome do arquivo da carga:\n=> ");
@@ -26,7 +26,7 @@ void carregamento() {
     
         //se abriu corretamente continua o codigo
         printf("\nDigite o mes do recebimento dessa carga:\n=> ");
-        scanf("%d", &AA);
+        scanf("%d", &mes);
         printf("\nDigite o ano do recebimento dessa carga:\n=> ");
         scanf("%d", &ano);
 
@@ -89,16 +89,17 @@ void carregamento() {
 
     fclose(file); // fecha o arquivo de entrada
 
-    geraRelatorio(protocolo, quantidadeDeAmostras, AA, ano, percentualUmidade, pesoLimpo, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
+    geraRelatorio(protocolo, quantidadeDeAmostras, mes, ano, percentualUmidade, pesoLimpo, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
+    arquivar(ID, protocolo, mes, ano, tipo, pesoGeralDaCarga, percentualDeImpurezas, percentualUmidade);
 }
 
-void geraRelatorio(int protocolo, int quantidadeDeAmostras, int AA, int ano, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
+void geraRelatorio(int protocolo, int quantidadeDeAmostras, int mes, int ano, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]) {
     system("clear");
 
     printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
     printf("ANO: 2024\n");
     printf("-------------------------------------------");
-    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d\n", protocolo, quantidadeDeAmostras, AA, ano);
+    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d\n", protocolo, quantidadeDeAmostras, mes, ano);
     printf("Umidade(%%): %.2f%%    Peso limpo(t): %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
     printf("Umidade: Faixa 1                            Quant.:%d\n", quantidadeA);
     printf("Ident. das Amostras: ");
@@ -125,4 +126,26 @@ void geraRelatorio(int protocolo, int quantidadeDeAmostras, int AA, int ano, flo
     }
 
     printf(".\n\n");
+}
+
+void arquivar(int origem, int carga, int MM, int DD, int tipo, float peso, float percImpurezas, float percUmidade){
+
+    FILE *file;
+    file = fopen("../data/database/carregamentos.dat", "ab");
+
+    if(file == NULL){
+        printf("O arquivo não foi aberto corretamente");
+        return;
+    }
+
+    fwrite(&origem, sizeof(int), 1, file);
+    fwrite(&carga, sizeof(int), 1, file);
+    fwrite(&MM, sizeof(int), 1, file);
+    fwrite(&DD, sizeof(int), 1, file);
+    fwrite(&tipo, sizeof(int), 1, file);
+    fwrite(&peso, sizeof(float), 1, file);
+    fwrite(&percImpurezas, sizeof(float), 1, file);
+    fwrite(&percUmidade, sizeof(float), 1, file);
+
+    fclose(file);
 }
