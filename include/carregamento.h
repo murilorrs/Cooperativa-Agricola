@@ -6,7 +6,7 @@
 
 
 void geraRelatorio(int protocolo, int quantidadeDeAmostras, int DD, int MM, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[]);
-void carregamento();
+// void carregamento();
 
 
 #endif
