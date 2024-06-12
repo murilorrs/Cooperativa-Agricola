@@ -1,34 +1,23 @@
 #include <stdio.h>
 
 
-double media (double *vetor, int);
+int parImpar (int par);
 
 
 int main(){
 
-    double vetor[5];
-    double valor;
-    int tamanho = 5;
+    int numero;
 
-    for(int i = 0; i < tamanho; i++){
-        printf("Digite o valor:\n");
-        scanf("%lf", &valor);
-        vetor[i] = valor;
-    }
+    printf("Digite o numero\n");
+    scanf("%d", &numero);
+   
 
-    printf("A media é: %.2lf\n",media (vetor, tamanho));
+    
+    parImpar(numero) ? printf("Par\n") : printf("impar\n");
 
     return 0;
 }
+int parImpar (int numero){
 
-double media (double *vetor, int tamanho){
-    double acumulador = 0;
-    double media;
-
-    for(int i = 0; i < tamanho; i++){
-        acumulador += *(vetor + i);
-        media = acumulador / tamanho;
-
-    }
-    return media;
+    return numero % 2 == 0;
 }
