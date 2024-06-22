@@ -1,4 +1,4 @@
-# Grao do Vale🌱
+# Graos do Vale🌱
 System for Grain Cargo Management
 
 This software, developed in C, is designed to manage grain cargoes within a cooperative.
