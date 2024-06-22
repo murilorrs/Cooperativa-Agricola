@@ -63,5 +63,6 @@
     "string.h": "c",
     "arquiva.h": "c",
     "stdlib.h": "c"
-  }
+  },
+  "C_Cpp.errorSquiggles": "enabled"
 }

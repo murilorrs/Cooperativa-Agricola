@@ -14,3 +14,5 @@ Este software, desenvolvido em C, foi projetado para gerenciar cargas de grãos 
 
 O programa lê arquivos contendo dados coletados por sensores, incluindo umidade, peso, níveis de impureza e tipo de produto, entre outros parâmetros.
 Ele processa esses dados, armazenando-os em um banco de dados, e gera relatórios mensais, anuais, individuais e estatísticos com base nas informações armazenadas.
+
+compilação: g++ ../src/main.c ../src/carregamento.c ../src/leitura.c -o programa -I../include

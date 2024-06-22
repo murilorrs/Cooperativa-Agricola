@@ -1,23 +1,48 @@
 #include <../include/leitura.h>
 
-void leitura(){
+typedef struct
+{
+    int origem;
+    int carga;
+    int mess;
+    int ano;
+    int tipo;
+    float peso;
+    float percImpurezas;
+    float percUmidade;
+} Dados;
 
-	FILE *file;
+void leitura(int *mes)
+{
 
-	file = fopen("../data/database/carregamentos.dat", "rb");
+    Dados d;
 
-	if(!file){
-		printf("erro ao abrir o arquivo");
-		return;
-	}
+    FILE *file;
+    file = fopen("../data/database/carregamentos.dat", "rb");
 
-	int data[1000];
-	fread(data, sizeof(int), 1000, file);
+    if (file == NULL)
+    {
+        printf("O arquivo não foi aberto corretamente");
+        return;
+    }
 
-	for(int i = 0; i < 10; i++){
-		printf("%d", data[i]);
-		printf("\n");	
-	}
+    while (fread(&d, sizeof(Dados), 1, file) == 1)
+    {
+        if (*mes == d.mess)
+        {
+            // Imprimir informações do carregamento
+            printf("Origem: %d\n", d.origem);
+            printf("Carga: %d\n", d.carga);
+            printf("Data: %02d/%02d\n", d.mess, d.ano);
+            printf("Tipo: %d\n", d.tipo);
+            printf("Peso: %.2f kg\n", d.peso);
+            printf("Impurezas: %.2f%%\n", d.percImpurezas);
+            printf("Umidade: %.2f%%\n", d.percUmidade);
+            printf("\n");
+        }
+        else
+            printf("\nO mes escolhido nao existe!\n");
+    }
 
-	fclose(file);
+    fclose(file);
 }

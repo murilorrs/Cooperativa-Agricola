@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 
-#ifndef LEITURA_H 
+#ifndef LEITURA_H
 #define LEITURA_H
 
-void leitura();
+void leitura(int *mes);
 
 #endif
