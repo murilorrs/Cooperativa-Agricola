@@ -5,6 +5,10 @@
 #ifndef LEITURA_H
 #define LEITURA_H
 
-void leitura(int *mes);
+void cabecalho();
+void leitura(int *mes, int *opcaoRelatorioQuantitativo, int *opcaoRelatorio);
+void mesEspecifico(int, int, float);
+void mesAMes(int, int, float);
+void relatorioEstatistico(int, float, float, int);
 
 #endif

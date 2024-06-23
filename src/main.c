@@ -20,7 +20,7 @@ int main()
         limpaBuffer();
         if (opcaoGeral >= 1 && opcaoGeral <= 4)
         {
-
+            system("clear");
             switch (opcaoGeral)
             {
             case 1:
@@ -33,7 +33,7 @@ int main()
                 printf("2: Geral\n=> ");
                 scanf("%d", &opcaoRelatorio);
                 limpaBuffer();
-
+                system("clear");
                 if (opcaoRelatorio == 1)
                 {
                     printf("\nEscolha o modelo de relatorio quantitativo:\n");
@@ -41,9 +41,9 @@ int main()
                     printf("2: Mes a mes\n=> ");
                     scanf("%d", &opcaoRelatorioQuantitativo);
                     limpaBuffer();
-
                     if (opcaoRelatorioQuantitativo == 1)
                     {
+                        system("clear");
                         printf("\nQual o mes desejado?\n");
                         printf("1: Janeiro\n");
                         printf("2: Fevereiro\n");
@@ -51,17 +51,18 @@ int main()
                         printf("12: Dezembro\n=> ");
                         scanf("%d", &mesEscolhido);
                         limpaBuffer();
-                        leitura(&mesEscolhido);
+                        leitura(&mesEscolhido, &opcaoRelatorioQuantitativo, &opcaoRelatorio);
                     }
 
                     if (opcaoRelatorioQuantitativo == 2)
                     {
-                        printf("Aqui deve vir uma funcao que vai imprimir o relatorio mes a mes\n");
+                        system("clear");
+                        leitura(&mesEscolhido, &opcaoRelatorioQuantitativo, &opcaoRelatorio);
                     }
                 }
                 else
                 {
-                    printf("Funcao que vai imprimir o relatorio geral\n");
+                    leitura(&mesEscolhido, &opcaoRelatorioQuantitativo, &opcaoRelatorio);
                 }
                 break;
             case 3:

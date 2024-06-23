@@ -99,7 +99,7 @@ void carregamento()
     fclose(file); // fecha o arquivo de entrada
 
     geraRelatorio(protocolo, quantidadeDeAmostras, mes, ano, percentualUmidade, pesoLimpo, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC);
-    arquivar(ID, protocolo, mes, ano, tipo, pesoGeralDaCarga, percentualDeImpurezas, percentualUmidade);
+    arquivar(ID, protocolo, mes, ano, tipo, pesoGeralDaCarga, percentualDeImpurezas, percentualUmidade, pesoLimpo);
 }
 
 void geraRelatorio(int protocolo, int quantidadeDeAmostras, int mes, int ano, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC, int faixaA[], int faixaB[], int faixaC[])
@@ -109,7 +109,7 @@ void geraRelatorio(int protocolo, int quantidadeDeAmostras, int mes, int ano, fl
     printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
     printf("ANO: 2024\n");
     printf("-------------------------------------------");
-    printf("\nOrigem: %d        Num. de amostras: %d     Data: %d/%d\n", protocolo, quantidadeDeAmostras, mes, ano);
+    printf("\nOrigem: %d           Num. de amostras: %d        Data: %d/%d\n", protocolo, quantidadeDeAmostras, mes, ano);
     printf("Umidade(%%): %.2f%%    Peso limpo(t): %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
     printf("Umidade: Faixa 1                            Quant.:%d\n", quantidadeA);
     printf("Ident. das Amostras: ");
@@ -141,7 +141,7 @@ void geraRelatorio(int protocolo, int quantidadeDeAmostras, int mes, int ano, fl
     printf(".\n\n");
 }
 
-void arquivar(int origem, int carga, int MM, int DD, int tipo, float peso, float percImpurezas, float percUmidade)
+void arquivar(int origem, int carga, int MM, int DD, int tipo, float peso, float percImpurezas, float percUmidade, float pesoLimpo)
 {
 
     FILE *file;
@@ -152,13 +152,13 @@ void arquivar(int origem, int carga, int MM, int DD, int tipo, float peso, float
         printf("O arquivo não foi aberto corretamente");
         return;
     }
-
     fwrite(&origem, sizeof(int), 1, file);
     fwrite(&carga, sizeof(int), 1, file);
     fwrite(&MM, sizeof(int), 1, file);
     fwrite(&DD, sizeof(int), 1, file);
     fwrite(&tipo, sizeof(int), 1, file);
     fwrite(&peso, sizeof(float), 1, file);
+    fwrite(&pesoLimpo, sizeof(float), 1, file);
     fwrite(&percImpurezas, sizeof(float), 1, file);
     fwrite(&percUmidade, sizeof(float), 1, file);
 
