@@ -1,4 +1,5 @@
 #include <../include/leitura.h>
+#include <../include/main.h>
 
 typedef struct {
   int origem;
@@ -22,8 +23,8 @@ void leitura(int *mes, int *opcaoRelatorioQuantitativo, int *opcaoRelatorio) {
     printf("O arquivo não foi aberto corretamente\n");
     return;
   }
-
   if (*opcaoRelatorio == 1)
+
     cabecalhoRelatorioMes();
   else
     cabecalhoRelatorioGeral();
@@ -42,6 +43,7 @@ void leitura(int *mes, int *opcaoRelatorioQuantitativo, int *opcaoRelatorio) {
 }
 
 void cabecalhoRelatorioMes() {
+  limpaTerminal();
   printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
   printf("ANO: 2024\n");
   printf("--------------------------------------------------------------------------\n");
@@ -78,6 +80,7 @@ void mesAMes(int origem, int cargas, float gUmidade) {
 }
 
 void cabecalhoRelatorioGeral() {
+  limpaTerminal();
   printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
   printf("ANO: 2024\n");
   printf("---------------------------------------------------------------------"
@@ -99,6 +102,7 @@ void relatorioGeral(int origem, float pesoTotal, float pesoLimpo, int tipo, floa
     } else {
       printf("%03d    %.2f | %.2f    X        |                   |\n", origem, pesoTotal, pesoLimpo);
     }
+    printf("             |                   |                   |\n");
 
   } else if (gUmidade >= 8.6 && gUmidade <= 15) {
 
@@ -107,6 +111,7 @@ void relatorioGeral(int origem, float pesoTotal, float pesoLimpo, int tipo, floa
     } else {
       printf("%03d    %.2f |                   | %.2f    X        |\n", origem, pesoTotal, pesoLimpo);
     }
+    printf("             |                   |                   |\n");
 
   } else if (gUmidade >= 16 && gUmidade <= 30) {
 
@@ -115,5 +120,6 @@ void relatorioGeral(int origem, float pesoTotal, float pesoLimpo, int tipo, floa
     } else {
       printf("%03d    %.2f |                   |                   |  %.2f    X\n", origem, pesoTotal, pesoLimpo);
     }
+    printf("             |                   |                   |\n");
   }
 }

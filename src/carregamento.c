@@ -47,6 +47,7 @@ void carregamento() {
   scanf("%d", &mes);
   printf("\nDigite o ano do recebimento dessa carga:\n=> ");
   scanf("%d", &ano);
+  limpaTerminal();
 
   fscanf(file, "%d%d%f%d%d", &ID, &protocolo, &pesoGeralDaCarga, &quantidadeDeAmostras,
          &tipo); // Usa fscanf para ler os 5 primeiros dados do arquivo

@@ -11,9 +11,7 @@ int main() {
 
   int sair = 0;
   while (sair == 0) {
-
-    printf("\n******************SELECIONE UMA DAS "
-           "OPCOES******************\n\n");
+    printf("\n******************SELECIONE UMA DAS OPCOES******************\n\n");
     printf("1: Analisar --- 2: Gerar relatorio --- 3: Sair\n=> ");
 
     scanf("%d", &opcaoGeral);
@@ -56,6 +54,7 @@ int main() {
             leitura(&mesEscolhido, &opcaoRelatorioQuantitativo, &opcaoRelatorio);
           }
         } else {
+          limpaTerminal();
           leitura(&mesEscolhido, &opcaoRelatorioQuantitativo, &opcaoRelatorio);
         }
         break;
@@ -69,6 +68,7 @@ int main() {
 
           if (opcaoDeSair == 1) {
             sair = 1;
+            limpaTerminal();
             break;
           } else if (opcaoDeSair == 2) {
             limpaTerminal();
@@ -94,4 +94,14 @@ void limpaBuffer() {
     ;
 }
 
-void limpaTerminal() { printf("\033[H\033[J"); }
+void limpaTerminal() {
+
+  printf("\033[H");
+  printf("\033[J");
+  for (int i = 0; i < 100; i++) {
+    printf("\n");
+  }
+
+  printf("\033[H");
+  fflush(stdout);
+}
