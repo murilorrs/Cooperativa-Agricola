@@ -79,7 +79,7 @@ void mesAMes(int origem, int cargas, float gUmidade)
         printf("                                                     X\n\n");
 }
 
-void relatorioEstatistico(int origem, float pesoTotal, float pesoLimpo, int tipo)
-{
-    printf("Origem  Peso Total |\n                               |");
-}
+// void relatorioEstatistico(int origem, float pesoTotal, float pesoLimpo, int tipo)
+// {
+//     printf("Origem  Peso Total |\n                               |");
+// }
