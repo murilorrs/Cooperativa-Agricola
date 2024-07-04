@@ -1,3 +1,5 @@
+#include "../include/escrevedb.h"
+#include "../include/relatorios.h"
 #include <../include/carregamento.h>
 #include <../include/main.h>
 
@@ -86,62 +88,4 @@ void carregamento() {
 
   geraRelatorio(protocolo, quantidadeDeAmostras, mes, ano, percentualUmidade, pesoLimpo, tipo, quantidadeA, quantidadeB, quantidadeC, faixaA, faixaB, faixaC, percentualDeImpurezas);
   arquivar(ID, protocolo, mes, ano, tipo, pesoGeralDaCarga, percentualDeImpurezas, percentualUmidade, pesoLimpo);
-}
-
-void geraRelatorio(int protocolo, int quantidadeDeAmostras, int mes, int ano, float percentualUmidade, float pesoLimpo, int transgenico, int quantidadeA, int quantidadeB, int quantidadeC,
-                   int faixaA[], int faixaB[], int faixaC[], float percentualImpureza) {
-
-  printf("%f\n", percentualImpureza);
-  printf("\nCOOPERATIVA AGRICOLA GRAO_DO_VALE V1.0\n");
-  printf("ANO: 2024\n");
-  printf("---------------------------------------------------------------");
-  printf("\nOrigem: %d           Num. de amostras: %d        Data: %d/%d\n", protocolo, quantidadeDeAmostras, mes, ano);
-  printf("Umidade(%%): %.2f%%    Peso limpo(t): %.2f       Transgenico: %d\n\n", percentualUmidade, pesoLimpo, transgenico);
-  printf("Umidade: Faixa 1                            Quant.:%d\n", quantidadeA);
-  printf("Ident. das Amostras: ");
-
-  for (int i = 0; i < quantidadeA; i++) {
-    printf("%d, ", faixaA[i]);
-  }
-
-  printf(".\n\n");
-
-  printf("Umidade: Faixa 2                            Quant.:%d\n", quantidadeB);
-  printf("Ident. das Amostras: ");
-
-  for (int i = 0; i < quantidadeB; i++) {
-    printf("%d, ", faixaB[i]);
-  }
-
-  printf(".\n\n");
-  printf("Umidade: Faixa 3                            Quant.:%d\n", quantidadeC);
-  printf("Ident. das Amostras: ");
-
-  for (int i = 0; i < quantidadeB; i++) {
-    printf("%d, ", faixaC[i]);
-  }
-
-  printf(".\n\n");
-}
-
-void arquivar(int origem, int carga, int MM, int DD, int tipo, float peso, float percImpurezas, float percUmidade, float pesoLimpo) {
-
-  FILE *file;
-  file = fopen("../data/database/carregamentos.dat", "ab");
-
-  if (file == NULL) {
-    printf("O arquivo não foi aberto corretamente");
-    return;
-  }
-  fwrite(&origem, sizeof(int), 1, file);
-  fwrite(&carga, sizeof(int), 1, file);
-  fwrite(&MM, sizeof(int), 1, file);
-  fwrite(&DD, sizeof(int), 1, file);
-  fwrite(&tipo, sizeof(int), 1, file);
-  fwrite(&peso, sizeof(float), 1, file);
-  fwrite(&pesoLimpo, sizeof(float), 1, file);
-  fwrite(&percImpurezas, sizeof(float), 1, file);
-  fwrite(&percUmidade, sizeof(float), 1, file);
-
-  fclose(file);
 }
