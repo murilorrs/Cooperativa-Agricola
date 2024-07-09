@@ -42,7 +42,7 @@ def ler_dados_dat(file_path):
         return []
     return dados
 
-@app.route('/api/dados/', methods=['GET'])
+@app.route('/dados', methods=['GET'])
 def obter_dados():
     file_path = '../data/database/carregamentos.dat' 
     dados = ler_dados_dat(file_path)
