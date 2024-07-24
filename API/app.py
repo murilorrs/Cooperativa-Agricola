@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Habilita CORS para todos os domínios e rotas
+CORS(app) 
 
 def ler_dados_dat(file_path):
     dados = []
